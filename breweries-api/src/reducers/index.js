@@ -1,17 +1,42 @@
+import FETCH_BREWERY_START from '../actions';
+import BREWERY_SUCCESS from '../actions';
+import BREWERY_ERROR from '../actions';
+
+
 const intitialState = { 
-    breweries: []
+    breweries: [],
+    error: '',
+    isLoading: false
 }
 
 export const reducer = (state = intitialState, action) => {
     switch (action.type) {
-        case "LOADING_BREWERIES": {
-            return {};
+        case FETCH_BREWERY_START : {
+            return {
+                ...state,
+                isLoading: true,
+                error: '',
+            };
         }
-        case "BREWERY_SUCCESS": {
-            return {};
+        case BREWERY_SUCCESS: {
+            return {
+                ...state,
+                breweries: [...breweries, action.payload],
+                isLoading: false,
+            };
         }
-        case "BREWERY_ERROR": {
-            return {};
+        case BREWERY_ERROR: {
+            return {
+                ...state,
+                error: action.payload,
+                isLoading: false
+            };
+        }
+        case "FILTER_BY_STATE": {
+            return {
+                ...state,
+                breweries: [...breweries.filter()]
+            }
         }
         default: return state;
     }
