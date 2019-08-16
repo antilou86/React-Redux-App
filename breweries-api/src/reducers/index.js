@@ -1,6 +1,6 @@
-import FETCH_BREWERY_START from '../actions';
-import BREWERY_SUCCESS from '../actions';
-import BREWERY_ERROR from '../actions';
+import {FETCH_BREWERY_START} from '../actions';
+import {BREWERY_SUCCESS} from '../actions';
+import {BREWERY_ERROR} from '../actions';
 
 
 const intitialState = { 
@@ -21,7 +21,7 @@ export const reducer = (state = intitialState, action) => {
         case BREWERY_SUCCESS: {
             return {
                 ...state,
-                breweries: [...breweries, action.payload],
+                breweries: [...state.breweries, action.payload],
                 isLoading: false,
             };
         }
@@ -35,9 +35,11 @@ export const reducer = (state = intitialState, action) => {
         case "FILTER_BY_STATE": {
             return {
                 ...state,
-                breweries: [...breweries.filter()]
+                breweries: [...state.breweries.filter()]
             }
         }
         default: return state;
     }
 }
+
+export default reducer;
