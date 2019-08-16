@@ -3,6 +3,7 @@ import Brewery from './Brewery'
 
 import { connect } from 'react-redux'
 import { getBreweries } from '../actions'
+import '../App.css'
 
 const BreweriesList = props => {
 
@@ -17,8 +18,9 @@ const BreweriesList = props => {
 
     return (
         <>
-            <h2>Check out all the BEER STUFF</h2>
-            <div>
+            <h1>Check out our <br/> Brewery finder!</h1>
+
+            <div className='breweries-container'>
                 {props.breweries && props.breweries.map(brewery => (
                     <Brewery key={brewery.id} brewery={brewery}></Brewery>
                 ))}
@@ -26,7 +28,7 @@ const BreweriesList = props => {
             
             {props.error && <p>{props.error}</p>}
            
-            <button onClick={() => getAllBreweries()}>Find Breweries!</button>
+            <button className="find-button" onClick={() => getAllBreweries()}>Find Breweries!</button>
 
             {/* <label>
                 <select>
@@ -35,7 +37,7 @@ const BreweriesList = props => {
                     </option>
                 </select>
             </label>*/}
-            <button onClick={filterByState}></button>
+            <button className='filter-button' onClick={filterByState}></button>
         </>
     )
 }
