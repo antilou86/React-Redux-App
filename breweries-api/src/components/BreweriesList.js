@@ -1,10 +1,12 @@
 import React from 'react';
 import Brewery from './Brewery'
-import {connect} from 'react-redux'
 
+import {connect} from 'react-redux'
+import {getBreweries} from '../actions'
 const BreweriesList = props => { 
-    const getAllBreweries = e => {
-        e.preventDefault();
+   
+    const getAllBreweries = () => {
+        console.log('button clicked!')
         props.getBreweries();
     };
     const filterByState = e => {
@@ -20,8 +22,16 @@ const BreweriesList = props => {
         ))}
         </div>
         {props.error && <p>{props.error}</p>}
-        <button onClick={getAllBreweries}>Find Breweries</button>
-        <button onClick={filterByState}></button>
+        <button onClick={getAllBreweries()}>Find Breweries</button>
+        
+            {/* <label>
+                <select>
+                    <option>
+                         states go here for stretch
+                    </option>
+                </select>
+            </label>*/}
+        <button onClick={filterByState}></button> 
         </>
     )
 }
@@ -32,4 +42,4 @@ const mapPropsToState = state => {
         error: state.error
     }
   }
-  export default connect(mapPropsToState, {})(BreweriesList)
+  export default connect(mapPropsToState, {getBreweries})(BreweriesList)

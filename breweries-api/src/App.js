@@ -5,7 +5,7 @@ import {getBreweries, getBreweriesByState} from './actions'
 function App() {
   return (
     <div className="App">
-      <BreweriesList/>
+      <BreweriesList getBreweries={getBreweries} getBreweriesByState={getBreweriesByState}/>
     </div>
   );
 }

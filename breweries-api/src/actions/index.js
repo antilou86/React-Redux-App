@@ -5,15 +5,19 @@ export const BREWERY_SUCCESS = "BREWERY_SUCCESS";
 export const BREWERY_ERROR ="BREWERY_ERROR";
 
 export const getBreweries = () => dispatch => {
+    console.log('getBreweries function fired! ')
     dispatch({type: FETCH_BREWERY_START});
     axios
     .get('https://api.openbrewerydb.org/breweries')
     .then( res => {
-        dispatch({ type: BREWERY_SUCCESS, payload: res.data });
         console.log("here is your data, sire ", res.data);
+        dispatch({ type: BREWERY_SUCCESS, payload: res.data });
             }
         )
-    .catch(err => dispatch({type:BREWERY_ERROR, payload: `ERROR LOADING: ${err}`}))
+    .catch(err => {
+        console.log("there was an error ", err);
+        dispatch({type:BREWERY_ERROR, payload: `ERROR LOADING: ${err}`})
+    })
 }
 
 
