@@ -19,9 +19,9 @@ const BreweriesList = props => {
         <>
             <h2>Check out all the BEER STUFF</h2>
             <div>
-                {props.breweries.length >=1 ? props.breweries.map(brewery => (
+                {props.breweries && props.breweries.map(brewery => (
                     <Brewery key={brewery.id} brewery={brewery}></Brewery>
-                )): (null)}
+                ))}
             </div>
             
             {props.error && <p>{props.error}</p>}
@@ -41,7 +41,7 @@ const BreweriesList = props => {
 }
 
 const mapStateToProps = state => ({
-        breweries: state.breweries,
+        breweries: state.breweries[0],
         error: state.error
     });
 export default connect(

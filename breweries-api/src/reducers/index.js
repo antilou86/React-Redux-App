@@ -1,6 +1,3 @@
-import { FETCH_BREWERY_START } from '../actions';
-import { BREWERY_SUCCESS } from '../actions';
-import { BREWERY_ERROR } from '../actions';
 
 
 const intitialState = { 
@@ -11,33 +8,32 @@ const intitialState = {
 
 function reducer(state = intitialState, action) {
     console.log('state from the reducer ', state);
+    console.log('action as it appears in the reducer', action)
     switch (action.type) {
-        case FETCH_BREWERY_START: 
+        case "FETCH_BREWERY_START": 
             return {
                 ...state,
-                breweries:[...state.breweries],
                 error: '',
                 isLoading: true
         };
-        case BREWERY_SUCCESS:
+        case "BREWERY_SUCCESS":
             return {
                 ...state,
                 breweries: [...state.breweries, action.payload],
-                errors: '',
+                error: '',
                 isLoading: false
             };
-        case BREWERY_ERROR:
+        case "BREWERY_ERROR":
             return {
                 ...state,
-                breweries: [...state.breweries],
-                error: action.payload,
-                isLoading: false
+                error: action.payload
             };
         case "FILTER_BY_STATE":
             return {
                 ...state,
-                breweries: [...state.breweries.filter()]
+                breweries: [...state.breweries[0].filter()]
             }
+
         default: return state;
     }
 }
