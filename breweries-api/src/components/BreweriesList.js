@@ -1,10 +1,11 @@
 import React from 'react';
 import Brewery from './Brewery'
 
-import {connect} from 'react-redux'
-import {getBreweries} from '../actions'
-const BreweriesList = props => { 
-   
+import { connect } from 'react-redux'
+import { getBreweries } from '../actions'
+
+const BreweriesList = props => {
+
     const getAllBreweries = () => {
         console.log('button clicked!')
         props.getBreweries();
@@ -13,17 +14,20 @@ const BreweriesList = props => {
         e.preventDefault();
         props.getBreweriesByState();
     }
+
     return (
         <>
-        <h2>Check out all the BEER STUFF</h2>
-        <div>
-        {props.breweries.map(brewery => (
-            <Brewery brewery={brewery} key={brewery.name} />
-        ))}
-        </div>
-        {props.error && <p>{props.error}</p>}
-        <button onClick={getAllBreweries()}>Find Breweries</button>
-        
+            <h2>Check out all the BEER STUFF</h2>
+            <div>
+                {props.breweries && props.breweries.map(brewery => (
+                    <Brewery key={brewery.id} brewery={brewery} />
+                ))}
+            </div>
+            
+            {props.error && <p>{props.error}</p>}
+           
+            <button onClick={() => getAllBreweries()}>Find Breweries</button>
+
             {/* <label>
                 <select>
                     <option>
@@ -31,15 +35,13 @@ const BreweriesList = props => {
                     </option>
                 </select>
             </label>*/}
-        <button onClick={filterByState}></button> 
+            <button onClick={filterByState}></button>
         </>
     )
 }
 
-const mapPropsToState = state => {
-    return {
+const mapPropsToState = state => ({
         breweries: state.breweries,
         error: state.error
-    }
-  }
-  export default connect(mapPropsToState, {getBreweries})(BreweriesList)
+    });
+export default connect(mapPropsToState, { getBreweries })(BreweriesList)
