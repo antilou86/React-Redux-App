@@ -1,43 +1,43 @@
-import {FETCH_BREWERY_START} from '../actions';
-import {BREWERY_SUCCESS} from '../actions';
-import {BREWERY_ERROR} from '../actions';
+import { FETCH_BREWERY_START } from '../actions';
+import { BREWERY_SUCCESS } from '../actions';
+import { BREWERY_ERROR } from '../actions';
 
 
 const intitialState = { 
     breweries: [],
     error: '',
     isLoading: false
-}
+};
 
-export const reducer = (state = intitialState, action) => {
+function reducer(state = intitialState, action) {
+    console.log('state from the reducer ', state);
     switch (action.type) {
-        case FETCH_BREWERY_START : {
+        case FETCH_BREWERY_START: 
             return {
                 ...state,
-                isLoading: true,
+                breweries:[...state.breweries],
                 error: '',
-            };
-        }
-        case BREWERY_SUCCESS: {
+                isLoading: true
+        };
+        case BREWERY_SUCCESS:
             return {
                 ...state,
                 breweries: [...state.breweries, action.payload],
-                isLoading: false,
+                errors: '',
+                isLoading: false
             };
-        }
-        case BREWERY_ERROR: {
+        case BREWERY_ERROR:
             return {
                 ...state,
+                breweries: [...state.breweries],
                 error: action.payload,
                 isLoading: false
             };
-        }
-        case "FILTER_BY_STATE": {
+        case "FILTER_BY_STATE":
             return {
                 ...state,
                 breweries: [...state.breweries.filter()]
             }
-        }
         default: return state;
     }
 }

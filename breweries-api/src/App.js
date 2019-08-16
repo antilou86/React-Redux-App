@@ -2,14 +2,18 @@ import React from 'react';
 import BreweriesList from './components/BreweriesList';
 import {connect} from 'react-redux';
 import {getBreweries, getBreweriesByState} from './actions'
-function App() {
+
+
+function App(props) {
   return (
     <div className="App">
       <BreweriesList getBreweries={getBreweries} getBreweriesByState={getBreweriesByState}/>
     </div>
   );
 }
-const mapPropsToState = state => {
-  return { }
+
+const mapStateToProps = (state) => {
+  return {...state}
 }
-export default connect(mapPropsToState, {getBreweries, getBreweriesByState})(App);
+
+export default connect(mapStateToProps, {getBreweries, getBreweriesByState})(App);

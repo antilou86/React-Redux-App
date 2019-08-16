@@ -19,14 +19,14 @@ const BreweriesList = props => {
         <>
             <h2>Check out all the BEER STUFF</h2>
             <div>
-                {props.breweries && props.breweries.map(brewery => (
-                    <Brewery key={brewery.id} brewery={brewery} />
-                ))}
+                {props.breweries.length >=1 ? props.breweries.map(brewery => (
+                    <Brewery key={brewery.id} brewery={brewery}></Brewery>
+                )): (null)}
             </div>
             
             {props.error && <p>{props.error}</p>}
            
-            <button onClick={() => getAllBreweries()}>Find Breweries</button>
+            <button onClick={() => getAllBreweries()}>Find Breweries!</button>
 
             {/* <label>
                 <select>
@@ -40,8 +40,11 @@ const BreweriesList = props => {
     )
 }
 
-const mapPropsToState = state => ({
+const mapStateToProps = state => ({
         breweries: state.breweries,
         error: state.error
     });
-export default connect(mapPropsToState, { getBreweries })(BreweriesList)
+export default connect(
+    mapStateToProps, 
+    { getBreweries }
+    )(BreweriesList);
